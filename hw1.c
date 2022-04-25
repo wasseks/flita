@@ -6,8 +6,6 @@
 int length(char *string);
 // возведение в положительную степень
 int powi(int number, int power);
-// определение длины динамической строки
-int length(char *string);
 // получение числа из строки
 int get_number(char *char_number);
 // получение динамической строки
