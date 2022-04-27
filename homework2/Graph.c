@@ -6,10 +6,9 @@ int main(){
     input = fopen("input.txt" , "r");
     output = fopen("matrix.gv", "w");
     int i = 0, j = 0;
-    char Matrix[100][100], c;   
+    char Matrix[100][100], c = ' ';   
 
     while(!feof(input)) {
-        fscanf(input, "%c", &c);
         if (c != ' ' && c != '\n') {
             Matrix[i][j] = c;
             j++;
@@ -17,11 +16,12 @@ int main(){
             i++;
             j = 0;
         }
+        fscanf(input, "%c", &c);
     }
 
     fprintf(output, "graph G {\n" );
-    for(int a = 0; a <= i; a++)
-        for(int b = 0; b <= i; b++)
+    for(int a = 0; a < j; a++)
+        for(int b = 0; b < j; b++)
             if(Matrix[a][b] != '0' && Matrix[b][a] != '0') {
                 fprintf(output, "\t%d -- %d [label=\"%c\"];\n", a + 1, b + 1, Matrix[a][b]);   
                 Matrix[a][b] = '0';
