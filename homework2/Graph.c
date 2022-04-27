@@ -13,14 +13,11 @@ int main(){
         if (c != ' ' && c != '\n') {
             Matrix[i][j] = c;
             j++;
-            printf("%d\n", j);
         } else if (c == '\n') {
             i++;
             j = 0;
         }
     }
-    printf("%d\n", j);
-    printf("%d", i);
 
     fprintf(output, "graph G {\n" );
     for(int a = 0; a <= i; a++)
