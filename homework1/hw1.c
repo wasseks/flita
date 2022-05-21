@@ -6,6 +6,8 @@
 int length(char *string);
 // возведение в положительную степень
 int powi(int number, int power);
+// проверяет является ли число строкой
+char verification(char *word);
 // получение числа из строки
 int get_number(char *char_number);
 // получение динамической строки
@@ -249,7 +251,7 @@ int search(int *array, int *len, int element) {
 void show(int *array, int len) { 
     for (int i = 0; i < len; i++)
         printf("%d - %d\n", (i+1), array[i]);
-
+        
     if (len == 0) 
         printf("There is no elements in the array\n");
 }
