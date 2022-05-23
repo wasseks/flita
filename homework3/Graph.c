@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define MAX 100
 
-int main(){
+int main() {
     FILE *input, *output;
     input = fopen("input.txt" , "r");
     output = fopen("matrix.gv", "w");
     int i = 0, j = 0;
-    char Matrix[100][100], c = ' ';   
+    char Matrix[MAX][MAX], c = ' ';   
     int edges = 0;
 
     while(!feof(input)) {
@@ -17,10 +18,12 @@ int main(){
             i++;
             j = 0;
         }
-        fscanf(input, "%c", &c);
+        c = fgetc(input);
     }
 
     fprintf(output, "graph G {\n" );
+    for(int a = 0; a < j; a++)
+        fprintf(output, "%d\n", a+1);
     for(int a = 0; a < j; a++)
         for(int b = 0; b < j; b++)
             if(Matrix[a][b] != '0' && Matrix[b][a] != '0') {
@@ -28,16 +31,19 @@ int main(){
                 Matrix[a][b] = '0';
                 edges++;
             }
-    fprintf(output, "}");
     
-    if(edges > ((j - 1) * (j - 2) / 2))  
+    if (edges >= ((j - 1) * (j - 2) / 2)) {
     	printf("connected graph\n");
-    else 
+        fprintf(output, "0 [label = \"connected graph\"]\n");
+    }
+    else {
     	printf("disconnected graph\n");
+        fprintf(output, "0 [label = \"disconnected graph\"]\n");
+    }
+    fprintf(output, "}");
 
     fclose(input);
     fclose(output);
     system("dot matrix.gv -Tpng -o graph.png");
-    system("graph.png");
     return 0;
 }
