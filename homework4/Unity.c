@@ -9,10 +9,10 @@ void get_matrix(char *file_source, FILE *input, int matrix[][MAX], int *vertices
 void printgraph(char **argv, int matrix[][MAX], int *vertices, int mode);
 
 int main(int argc, char **argv) {
-    int first_matrix[MAX][MAX], second_matrix[MAX][MAX], unity_matrix[MAX][MAX];
-    int first_vc = 0, second_vc = 0, final_vc = 0;
     if (argc < 3)
         return 0;
+    int first_matrix[MAX][MAX], second_matrix[MAX][MAX], unity_matrix[MAX][MAX];
+    int first_vc = 0, second_vc = 0, final_vc = 0;
     initialization(first_matrix);
     initialization(second_matrix);
     initialization(unity_matrix); 
