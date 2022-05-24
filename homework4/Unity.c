@@ -9,13 +9,13 @@ void get_matrix(char *file_source, FILE *input, int matrix[][MAX], int *vertices
 void printgraph(char **argv, int matrix[][MAX], int *vertices, int mode);
 
 int main(int argc, char **argv) {
+    int first_matrix[MAX][MAX], second_matrix[MAX][MAX], unity_matrix[MAX][MAX];
+    int first_vc = 0, second_vc = 0, final_vc = 0;
     if (argc < 3)
         return 0;
-    int first_matrix[MAX][MAX], second_matrix[MAX][MAX], unity_matrix[MAX][MAX];
     initialization(first_matrix);
     initialization(second_matrix);
-    initialization(unity_matrix);
-    int first_vc = 0, second_vc = 0, final_vc = 0; 
+    initialization(unity_matrix); 
     printgraph(argv, first_matrix, &first_vc, 1);
     printgraph(argv, second_matrix, &second_vc, 2);
     final_vc = MIN(first_vc, second_vc);
@@ -80,7 +80,7 @@ void printgraph(char **argv, int matrix[][MAX], int *vertices, int mode) {
 }
 
 void initialization(int matrix[][MAX]) {
-    int i, j;
+    register int i, j;
     for(i = 0; i < MAX; i++)
         for(j = 0; j < MAX; j++)
             matrix[i][j] = 0;
@@ -88,7 +88,7 @@ void initialization(int matrix[][MAX]) {
 }
 
 void copy(int final_matrix[][MAX], int ini_matrix[][MAX]) {
-    int i, j;
+    register int i, j;
     for(i = 0; i < MAX; i++)
         for(j = 0; j < MAX; j++)
             final_matrix[i][j] = ini_matrix[i][j];
