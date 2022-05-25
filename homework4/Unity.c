@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
     int first_matrix[MAX][MAX], second_matrix[MAX][MAX], unity_matrix[MAX][MAX];
     int first_vc = 0, second_vc = 0, final_vc = 0;
     initialization(first_matrix);
-    initialization(second_matrix);
+    initialization(second_matrix); 
     initialization(unity_matrix); 
     print_graph(argv, first_matrix, &first_vc, 1);
     print_graph(argv, second_matrix, &second_vc, 2);
