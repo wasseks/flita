@@ -6,7 +6,7 @@
 void initialization(int matrix[][MAX]);
 void copy(int final_matrix[][MAX], int ini_matrix[][MAX]);
 void get_matrix(char *file_source, FILE *input, int matrix[][MAX], int *vertices);
-void printgraph(char **argv, int matrix[][MAX], int *vertices, int mode);
+void print_graph(char **argv, int matrix[][MAX], int *vertices, int mode);
 
 int main(int argc, char **argv) {
     if (argc < 3)
@@ -16,14 +16,14 @@ int main(int argc, char **argv) {
     initialization(first_matrix);
     initialization(second_matrix);
     initialization(unity_matrix); 
-    printgraph(argv, first_matrix, &first_vc, 1);
-    printgraph(argv, second_matrix, &second_vc, 2);
+    print_graph(argv, first_matrix, &first_vc, 1);
+    print_graph(argv, second_matrix, &second_vc, 2);
     final_vc = MIN(first_vc, second_vc);
     for (int a = 0; a < MAX; a++)
         for (int b = 0; b < MAX; b++) 
             if ((first_matrix[a][b] == second_matrix[a][b]) != 0)
                 unity_matrix[a][b] = first_matrix[a][b];
-    printgraph(argv, second_matrix, &final_vc, 3);
+    print_graph(argv, second_matrix, &final_vc, 3);
     return 0;
 }
 
@@ -46,7 +46,7 @@ void get_matrix(char *file_source, FILE *input, int matrix[][MAX], int *vertices
     fclose(input);
 }
 
-void printgraph(char **argv, int matrix[][MAX], int *vertices, int mode) {
+void print_graph(char **argv, int matrix[][MAX], int *vertices, int mode) {
     FILE *input, *output;
     int a, b; 
     int edges = 0;
