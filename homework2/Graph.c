@@ -29,6 +29,7 @@ int main() {
                 fprintf(output, "\t%d -- %d [label=\"%c\"];\n", a + 1, b + 1, Matrix[a][b]);   
                 Matrix[a][b] = '0';
             }
+    fprintf(output, "}");
     
     fclose(input);
     fclose(output);
