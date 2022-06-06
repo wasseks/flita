@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <Windows.h> 
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 #define MAX 25
 
@@ -7,10 +8,12 @@ void initialization(int matrix[][MAX]);
 void copy(int final_matrix[][MAX], int ini_matrix[][MAX]);
 void get_matrix(char *file_source, FILE *input, int matrix[][MAX], int *vertices);
 void print_graph(char **argv, int matrix[][MAX], int *vertices, int mode);
+void unity(int final_matrix[][MAX], int first_matrix[][MAX], int second_matrix[][MAX], int *final_vc, int first_vc, int second_vc);
 
 int main(int argc, char **argv) {
     if (argc < 3)
         return 0;
+    long time;
     int first_matrix[MAX][MAX], second_matrix[MAX][MAX], unity_matrix[MAX][MAX];
     int first_vc = 0, second_vc = 0, final_vc = 0;
     initialization(first_matrix);
@@ -18,12 +21,11 @@ int main(int argc, char **argv) {
     initialization(unity_matrix); 
     print_graph(argv, first_matrix, &first_vc, 1);
     print_graph(argv, second_matrix, &second_vc, 2);
-    final_vc = MIN(first_vc, second_vc);
-    for (int a = 0; a < MAX; a++)
-        for (int b = 0; b < MAX; b++) 
-            if ((first_matrix[a][b] == second_matrix[a][b]) != 0)
-                unity_matrix[a][b] = first_matrix[a][b];
-    print_graph(argv, second_matrix, &final_vc, 3);
+    time = GetTickCount();
+    unity(unity_matrix, first_matrix, second_matrix, &final_vc, first_vc, second_vc);
+    time = GetTickCount() - time;
+    print_graph(argv, unity_matrix, &final_vc, 3);
+    printf ("It took me %ld milliseconds.\n", time);
     return 0;
 }
 
@@ -92,4 +94,12 @@ void copy(int final_matrix[][MAX], int ini_matrix[][MAX]) {
     for(i = 0; i < MAX; i++)
         for(j = 0; j < MAX; j++)
             final_matrix[i][j] = ini_matrix[i][j];
+}
+
+void unity(int final_matrix[][MAX], int first_matrix[][MAX], int second_matrix[][MAX], int *final_vc, int first_vc, int second_vc) {
+    *final_vc = MIN(first_vc, second_vc);
+    for (int a = 0; a < MAX; a++)
+        for (int b = 0; b < MAX; b++) 
+            if ((first_matrix[a][b] == second_matrix[a][b]) != 0)
+                final_matrix[a][b] = first_matrix[a][b];
 }
